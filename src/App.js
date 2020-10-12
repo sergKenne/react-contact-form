@@ -36,42 +36,53 @@ class App extends Component {
     let arrType = [];
     let arrValue = [];
     const cloneObj = JSON.parse(JSON.stringify(obj));
-    cloneObj.map(el => {
-      return {
-        type: el.type,
-        value: el.value
-      }
-    }).forEach(item => {
-        arrType.push(item.type);
-        arrValue.push(item.value);
-    });
 
-    const newFormValues = {
-      type: arrType,
-      value: arrValue
+    if(cloneObj.length) {
+      cloneObj.map(el => {
+        return {
+          type: el.type,
+          value: el.value
+        }
+      }).forEach(item => {
+          arrType.push(item.type);
+          arrValue.push(item.value);
+      });
+
+      const newFormValues = {
+        type: arrType,
+        value: arrValue
+      }
+      Storage.setNewForm(newFormValues);
+      console.log("newFormValues:", newFormValues);
+      this.setState({newFormValues: Storage.getNewForm()})
+      return newFormValues
+    } else {
+
+      Storage.setNewForm({});
+      this.setState({newFormValues: Storage.getNewForm()})
+      return;
     }
-    Storage.setNewForm(newFormValues);
-    console.log("newFormValues:", newFormValues);
-    this.setState({newFormValues: Storage.getNewForm()})
-    return newFormValues
   }
 
   convertArrayToObject = (newFormValues) => {
     const itemTypes = Object.keys(newFormValues);
     const itemValues = Object.values(newFormValues);
-    
-    const arrayToObject =  itemTypes.length && itemValues[0].map((el, ind) => {
-      return {
-        [`${itemTypes[0]}`]: el,
-        [`${itemTypes[1]}`]: itemValues[1][ind],
-      }
-    })
-    console.log("arrayToObject:", arrayToObject);
-    this.setState({arrayToObject});
-    return arrayToObject;
-  }
 
-  
+    if(itemTypes.length) {
+        const arrayToObject = itemValues[0].map((el, ind) => {
+            return {
+                [`${itemTypes[0]}`]: el,
+                [`${itemTypes[1]}`]: itemValues[1][ind],
+            }
+        });
+
+        console.log("arrayToObject:", arrayToObject);
+        this.setState({arrayToObject});
+        return arrayToObject;
+    } else {
+      this.setState({arrayToObject: []});
+    }
+  }
 
   componentDidMount() {
     var elems = document.querySelectorAll("select");
@@ -80,10 +91,6 @@ class App extends Component {
     !Storage.getFormStorage() ?
       Storage.setFormStorage([]) :
       this.setState({formValues: Storage.getFormStorage()});
-
-    !Object.keys(Storage.getNewForm()).length  ?
-      Storage.setNewForm({}) :
-      this.setState({newFormValues: Storage.getNewForm()})
   }
 
   render() {
@@ -107,7 +114,7 @@ class App extends Component {
               </button>
               <div className={showArray ? "code-blog" : "code-blog hide"}>
                   {"{"}<br/>
-                    {Object.keys(newFormValues).length && Object.keys(newFormValues).map((el,ind) => {
+                    {!(Object.keys(newFormValues).length) ? "" : Object.keys(newFormValues).map((el,ind) => {
                       return <div key={`${el}-${ind}`}>
                           &nbsp;&nbsp;&nbsp;&nbsp; {` ${el}: [${newFormValues[el].map(item => `"${item}" `)}],`}
                       </div>
@@ -125,7 +132,7 @@ class App extends Component {
               </button>
               <div className={showObject ? "code-blog" : "code-blog hide"}>
                 [<br/><br/>
-                  {arrayToObject.map((el, ind) => {
+                  {!(arrayToObject.length)? "" : arrayToObject.map((el, ind) => {
                     return <div key={`${el}-${ind}`}>
                         &nbsp;&nbsp;&nbsp;&nbsp;{"{"}<br/>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": {`'${el.type}'`},<br/>
