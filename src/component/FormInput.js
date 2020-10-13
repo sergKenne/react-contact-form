@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import  { trim } from "jquery";
 
-
 class FormInput extends Component {
 
     constructor(props) {
@@ -12,22 +11,16 @@ class FormInput extends Component {
             options: ["", "Email", "Phone", "Link"],
             inputValue:"",
             nameValue:"",
-            errorMes:"",
+            errorMes:""
         }
         this.inputField = React.createRef();
     }
 
-    
-
     setinputFieldAttribut = (placeholder, name, disabled) => {
-        
+        this.inputField.current.disabled = disabled;
         this.inputField.current.placeholder = placeholder;
         this.inputField.current.name = name;
-        this.inputField.current.disabled = disabled;
-        this.inputField.current.focus()
-        this.inputField.current.style.border="1px solid #4CAF50";
-        this.setState(prevState => ({ ...prevState, nameValue: name}))
-        
+        this.setState(prevState => ({ ...prevState, nameValue: name}));
     }
 
     formValidation = (nameVal, inputVal) => {
@@ -79,8 +72,13 @@ class FormInput extends Component {
         } else {
             this.inputField.current.placeholder = "";
             this.inputField.current.disabled = true;
+            this.setState(prevState => ({ ...prevState, nameValue: ""})); //++
         }
-        return;
+
+        setTimeout(()=>{
+            this.inputField.current.focus()
+        }, 200);
+
     }
 
     handleChangeFieldOption = (e) => {
@@ -101,7 +99,7 @@ class FormInput extends Component {
 
     render() {
 
-        const {errorMes} = this.state;
+        const {errorMes, nameValue} = this.state;
         const showbtn = this.state.inputValue.length ? "" : "hide";
 
         return (
@@ -121,8 +119,7 @@ class FormInput extends Component {
                 <div className="input-field filed-value">
                   <input 
                     placeholder="" 
-                    
-                    className="validate" 
+                    className={ nameValue.length ? "validate activeInput" : "validate"}
                     ref={this.inputField}
                     value={this.state.inputValue}
                     name=""

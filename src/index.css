@@ -153,3 +153,8 @@ input.valid[type=text]:not(.browser-default) {
   display: none;
 }
 
+.activeInput {
+   box-shadow: 0 0 2px 2px  #0091ea !important;
+   /* border: 3px solid #0091ea    !important; */
+}
+
