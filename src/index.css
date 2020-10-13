@@ -21,7 +21,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  /* border: 1px solid red; */
 }
 
 .input-field {
@@ -53,8 +52,6 @@ body {
     margin-left: 10px;
 }
   
-
-
   .btn-wrap {
     width: 100%;
   }
@@ -73,12 +70,11 @@ body {
 
   .btn-wrap {
       margin: 0 auto;
+      margin-top: 2.5rem;
   }
 }
 
 .errorMes {
-  /* position: relative;
-  top: 10px; */
   position: absolute;
   bottom: -30px;
   left: 0;
@@ -101,22 +97,18 @@ body {
   transform: rotate(45deg);
 }
 
-.select-wrapper {
-  /* background-color:  #f0f8ff; */
-}
-
 .select-wrapper input.select-dropdown,
 input[type=text]:not(.browser-default),
 input[type=number]:not(.browser-default)
 {
   padding: 0 5px;
   margin: 0;
-  /* background-color:  #f0f8ff; */
   border-radius: 4px;
   border-bottom: none;
-
+  width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 
 .select-wrapper input.select-dropdown:focus,
@@ -129,11 +121,14 @@ input[type=number]:not(.browser-default):focus:not([readonly])
 }
 
 input[type=text]:not(.browser-default):disabled {
-  color: #000000
+  color: #000000;
+  border: none;
 }
 
-input[type=text]:not(.browser-default):disabled {
-  border: none;
+input.valid[type=text]:not(.browser-default) {
+  border-bottom: none;
+  -webkit-box-shadow:none;
+  box-shadow: none;
 }
 
 .btn-wrap {
@@ -148,17 +143,11 @@ input[type=text]:not(.browser-default):disabled {
   margin-right: 10px;
 }
 
-.code {
-
-}
-
 .code-blog {
   background-color: floralwhite;
   margin: 1rem 0;
   padding: 2rem;
 }
-
-
 
 .hide {
   display: none;

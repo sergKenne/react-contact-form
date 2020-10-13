@@ -14,26 +14,26 @@ class FormInput extends Component {
             nameValue:"",
             errorMes:"",
         }
+        this.inputField = React.createRef();
     }
 
-    inputField = React.createRef("");
+    
 
-    setinputFieldAttribut = (placeholder, name, type, disabled) => {
+    setinputFieldAttribut = (placeholder, name, disabled) => {
+        
         this.inputField.current.placeholder = placeholder;
         this.inputField.current.name = name;
         this.inputField.current.disabled = disabled;
+        this.inputField.current.focus()
+        this.inputField.current.style.border="1px solid #4CAF50";
         this.setState(prevState => ({ ...prevState, nameValue: name}))
         
     }
 
     formValidation = (nameVal, inputVal) => {
-
         const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ ;
         const regexLink = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
         const regexPhone = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-
-        
-
 
         let  newForm ={}, trimVal = trim(inputVal);
 
@@ -69,8 +69,9 @@ class FormInput extends Component {
     }
 
     setFieldOption = (option) => {
+        
         if(option === "Email") {
-            this.setinputFieldAttribut("email@example.com", "email", false)
+            this.setinputFieldAttribut("email@example.com", "email", false);
         } else if(option === "Phone") {
             this.setinputFieldAttribut("+78900456134", "phone", false)
         } else if(option === "Link") {
