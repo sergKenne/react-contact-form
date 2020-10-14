@@ -27,7 +27,7 @@ body {
   width: 230px;
   margin: 0;
   background-color:  #f0f8ff;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .filed-value {
@@ -101,7 +101,7 @@ body {
 input[type=text]:not(.browser-default),
 input[type=number]:not(.browser-default)
 {
-  padding: 0 5px;
+  padding: 0 9px;
   margin: 0;
   border-radius: 4px;
   border-bottom: none;
