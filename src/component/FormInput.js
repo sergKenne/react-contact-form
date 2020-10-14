@@ -131,7 +131,7 @@ class FormInput extends Component {
                 </div>
                 <div className="btn-wrap">
                   <button 
-                    className={`btn waves-effect waves-light green ${showbtn}` }
+                    className={`btn waves-effect waves-light green  ${showbtn}` }
                     type="submit"
                   >
                       <i className="fas fa-plus"></i>

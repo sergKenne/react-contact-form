@@ -12,10 +12,10 @@ const FormItem = ({item, id, deleteForm}) => {
                     <input className="validate" value={item.value} name=""type="text" disabled/>
                 </div>
                 <div className="btn-wrap">
-                    <button  className="btn waves-effect waves-light green">
+                    <button  className="btn waves-effect waves-light green green-light" disabled>
                         <i className="fas fa-plus"></i>
                     </button>
-                    <button className="btn waves-effect waves-light red " onClick={() => deleteForm(id)}>
+                    <button className="btn waves-effect waves-light red" onClick={() => deleteForm(id)}>
                         <i className="fas fa-minus"></i>
                     </button>
                 </div>
