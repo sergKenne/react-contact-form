@@ -15,6 +15,11 @@ body {
   width: 640px;  
   padding: 5px;
 }
+.title {
+  /* font-size: 2rem; */
+  text-align: center;
+  color: #c9d7d6;
+}
 
 .form-wrap {
   display: flex;
@@ -42,16 +47,17 @@ body {
     width: 35%;
   }
 
-
-.btn {
-    height: 40px;
-    line-height: 40px;
-    font-size: 15px;
-    padding: 0 ;
-    margin-right: 0!important;
-    margin-left: 10px;
-}
-  
+  .title {
+    font-style: 2.2rem!important;
+  }
+  .btn {
+      height: 40px;
+      line-height: 40px;
+      font-size: 15px;
+      padding: 0 ;
+      margin-right: 0!important;
+      margin-left: 10px;
+  }
   .btn-wrap {
     width: 100%;
   }

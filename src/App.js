@@ -96,56 +96,87 @@ class App extends Component {
   render() {
     const {newFormValues, arrayToObject, formValues, showArray, showObject} = this.state
     return (
-      <div className="app">
-        <div className="wrapper">
-          <div className="formList">
-            {this.state.formValues.map((item) => {
-              return <FormItem id={item.id} key={item.id} item={item} deleteForm={this.deleteForm} />
-            })}
-          </div>
-          <FormInput addForm={this.addForm}/>
-          <br/><br/>
-          <div className="code">
-              <button className="waves-effect waves-light btn-large" onClick={() => {
-                 this.getFormValues(formValues);
-                 this.setState(state => ({...state, showArray: !state.showArray}));
-              }}>
-                get Form Values
-              </button>
-              <div className={showArray ? "code-blog" : "code-blog hide"}>
-                  {"{"}<br/>
-                    {!(Object.keys(newFormValues).length) ? "" : Object.keys(newFormValues).map((el,ind) => {
-                      return <div key={`${el}-${ind}`}>
-                          &nbsp;&nbsp;&nbsp;&nbsp; {` ${el}: [${newFormValues[el].map(item => `"${item}" `)}],`}
-                      </div>
+        <div className="app">
+            <h3 className="title">форма для заполнения контактов</h3>
+            <div className="wrapper">
+                <div className="formList">
+                    {this.state.formValues.map((item) => {
+                        return (
+                            <FormItem
+                                id={item.id}
+                                key={item.id}
+                                item={item}
+                                deleteForm={this.deleteForm}
+                            />
+                        );
                     })}
-                  <br/>{"}"}
-              </div>  
-          </div>
-          <div className="code">
-              <br/>
-              <button className="waves-effect waves-light btn-large purple" onClick={() => {
-                this.convertArrayToObject(newFormValues);
-                this.setState(state => ({...state, showObject: !state.showObject}))
-              }}>
-                convert Array To Object
-              </button>
-              <div className={showObject ? "code-blog" : "code-blog hide"}>
-                [<br/><br/>
-                  {!(arrayToObject.length)? "" : arrayToObject.map((el, ind) => {
-                    return <div key={`${el}-${ind}`}>
-                        &nbsp;&nbsp;&nbsp;&nbsp;{"{"}<br/>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": {`'${el.type}'`},<br/>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value": {`'${el.value}'`}
-                        <br/>&nbsp;&nbsp;&nbsp;&nbsp;{"},"}
+                </div>
+                <FormInput addForm={this.addForm} />
+                <br />
+                <br />
+                <div className="code">
+                    <button
+                        className="waves-effect waves-light btn-large"
+                        onClick={() => {
+                            this.getFormValues(formValues);
+                            this.setState((state) => ({ ...state, showArray: !state.showArray }));
+                        }}>
+                        get Form Values
+                    </button>
+                    <div className={showArray ? 'code-blog' : 'code-blog hide'}>
+                        {'{'}
+                        <br />
+                        {!Object.keys(newFormValues).length
+                            ? ''
+                            : Object.keys(newFormValues).map((el, ind) => {
+                                  return (
+                                      <div key={`${el}-${ind}`}>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;{' '}
+                                          {` ${el}: [${newFormValues[el].map(
+                                              (item) => `"${item}" `,
+                                          )}],`}
+                                      </div>
+                                  );
+                              })}
+                        <br />
+                        {'}'}
                     </div>
-                  })}
-                <br/>]
-              </div>  
-          </div>
+                </div>
+                <div className="code">
+                    <br />
+                    <button
+                        className="waves-effect waves-light btn-large purple"
+                        onClick={() => {
+                            this.convertArrayToObject(newFormValues);
+                            this.setState((state) => ({ ...state, showObject: !state.showObject }));
+                        }}>
+                        convert Array To Object
+                    </button>
+                    <div className={showObject ? 'code-blog' : 'code-blog hide'}>
+                        [<br />
+                        <br />
+                        {!arrayToObject.length
+                            ? ''
+                            : arrayToObject.map((el, ind) => {
+                                  return (
+                                      <div key={`${el}-${ind}`}>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;{'{'}
+                                          <br />
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type":{' '}
+                                          {`'${el.type}'`},<br />
+                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value":{' '}
+                                          {`'${el.value}'`}
+                                          <br />
+                                          &nbsp;&nbsp;&nbsp;&nbsp;{'},'}
+                                      </div>
+                                  );
+                              })}
+                        <br />]
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    )
+    );
   }
 }
 
