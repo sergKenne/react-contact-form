@@ -13,6 +13,7 @@ class App extends Component {
             arrayToObject: [],
             showArray: false,
             showObject: false,
+            loading: true,
         };
     }
 
@@ -103,7 +104,7 @@ class App extends Component {
     render() {
         const { newFormValues, arrayToObject, formValues, showArray, showObject, loading } = this.state;
         return (
-            <div className="app" >
+            <div className="app">
                 <h3 className="title">форма для заполнения контактов</h3>
                 <div className="wrapper">
                     <div className="formList">
